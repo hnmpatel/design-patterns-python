@@ -5,26 +5,55 @@ logic of creating objects.
 
 from abc import ABCMeta, abstractmethod
 
-class Person(metaclass=ABCMeta):
+class Degree(metaclass=ABCMeta):
     @abstractmethod
-    def create(self):
+    def info(self):
         pass
 
-class HR(Person):
-    def create(self, name):
-        print(f"HR {name} is created")
 
-class Engineer(Person):
-    def create(self, name):
-        print(f"Engineer {name} is created")
+class BE(Degree):
+    def info(self):
+        print(f"Bachelor of engineering")
 
-class PersonFactory(object):
-    @classmethod
-    def createPerson(cls, designation, name):
-        eval(designation)().create(name)
+
+class ME(Degree):
+    def info(self):
+        print(f"Master of engineering")
+
+
+class MBA(Degree):
+    def info(self):
+        print(f"Master of business administration")
+
+
+class ProfileFactory(object):
+    def __init__(self):
+        self._degrees = []
+
+    @abstractmethod
+    def createProfile(self):
+        pass
+
+    def addDegree(self, degree):
+        self._degrees.append(degree)
+
+    def getDegrees(self):
+        return self._degrees
+
+
+class Manager(ProfileFactory):
+    def createProfile(self):
+        self.addDegree(BE())
+        self.addDegree(MBA())
+
+class Engineer(ProfileFactory):
+    def createProfile(self):
+        self.addDegree(BE())
+        self.addDegree(ME())
 
 
 if __name__ == "__main__":
-    designation = input("Please enter the designation - ")
-    name = input("Please enter the person's name - ")
-    PersonFactory.createPerson(designation, name)
+    profile = input("Please create profile from Engineering or Manager - ")
+    p = eval(profile)()
+    p.createProfile()
+    print(p.getDegrees())
