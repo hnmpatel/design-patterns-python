@@ -5,28 +5,36 @@ logic of creating objects.
 
 from abc import ABCMeta, abstractmethod
 
-class Degree(metaclass=ABCMeta):
+class AbstractDegree(metaclass=ABCMeta):
     @abstractmethod
     def info(self):
         pass
 
 
-class BE(Degree):
+class BE(AbstractDegree):
     def info(self):
-        print(f"Bachelor of engineering")
+        print("Bachelor of engineering")
 
+    def __str__(self):
+        return "Bachelor of engineering"
 
-class ME(Degree):
+class ME(AbstractDegree):
     def info(self):
-        print(f"Master of engineering")
+        print("Master of engineering")
+
+    def __str__(self):
+        return "Master of engineering"
 
 
-class MBA(Degree):
+class MBA(AbstractDegree):
     def info(self):
-        print(f"Master of business administration")
+        print("Master of business administration")
+
+    def __str__(self):
+        return "Master of business administration"
 
 
-class ProfileFactory(object):
+class ProfileAbstractFactory(object):
     def __init__(self):
         self._degrees = []
 
@@ -41,19 +49,24 @@ class ProfileFactory(object):
         return self._degrees
 
 
-class Manager(ProfileFactory):
+class ManagerFactory(ProfileAbstractFactory):
     def createProfile(self):
         self.addDegree(BE())
         self.addDegree(MBA())
+        return self._degrees
 
-class Engineer(ProfileFactory):
+class EngineerFactory(ProfileAbstractFactory):
     def createProfile(self):
         self.addDegree(BE())
         self.addDegree(ME())
+        return self._degrees
 
+class ProfileFactory(object):
+    def getProfile(self, factory):
+        return factory.createProfile()
+
+    
 
 if __name__ == "__main__":
-    profile = input("Please create profile from Engineering or Manager - ")
-    p = eval(profile)()
-    p.createProfile()
-    print(p.getDegrees())
+    pf = ProfileFactory().getProfile(ManagerFactory())
+    print(pf)
