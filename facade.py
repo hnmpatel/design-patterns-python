@@ -27,4 +27,4 @@ class Frier(object):
 
 if __name__ == "__main__":
     cook = Cook()
-    rest.prepareDish()
+    cook.prepareDish()
