@@ -1,8 +1,4 @@
 """
-Learn how to create simple factory which helps to hide
-logic of creating objects.
-"""
-"""
 Provide an interface for creating families of related or dependent
 objects without specifying their concrete classes.
 """
