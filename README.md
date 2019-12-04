@@ -7,5 +7,7 @@
 ### Creational Design Patterns
 - SignleTon
 - Factory
-  - Factory method pattern
-  - Abstract factory pattern
+  - Simple Factory
+  - Factory method
+  - Abstract factory
+- Facade

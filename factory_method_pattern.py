@@ -37,6 +37,7 @@ class MBA(AbstractDegree):
 class ProfileAbstractFactory(object):
     def __init__(self):
         self._degrees = []
+        self.createProfile()
 
     @abstractmethod
     def createProfile(self):
@@ -53,20 +54,15 @@ class ManagerFactory(ProfileAbstractFactory):
     def createProfile(self):
         self.addDegree(BE())
         self.addDegree(MBA())
-        return self._degrees
 
 class EngineerFactory(ProfileAbstractFactory):
     def createProfile(self):
         self.addDegree(BE())
         self.addDegree(ME())
-        return self._degrees
 
-class ProfileFactory(object):
-    def getProfile(self, factory):
-        return factory.createProfile()
 
-    
-
-if __name__ == "__main__":
-    pf = ProfileFactory().getProfile(ManagerFactory())
-    print(pf)
+if __name__ == '__main__':
+    profile_type = input("Which Profile would you like to create? Manager/Engineer")
+    profile = eval(profile_type + 'Factory')()
+    print("Creating Profile..", profile_type)
+    print("Profile has degrees --", profile.getDegrees())
