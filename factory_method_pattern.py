@@ -60,9 +60,17 @@ class EngineerFactory(ProfileAbstractFactory):
         self.addDegree(BE())
         self.addDegree(ME())
 
+class ProfileCreatorFactory(object):
+
+    @classmethod
+    def create_profile(self, name):
+        return eval(profile_type + 'Factory')()
+
 
 if __name__ == '__main__':
-    profile_type = input("Which Profile would you like to create? Manager/Engineer")
-    profile = eval(profile_type + 'Factory')()
-    print("Creating Profile..", profile_type)
-    print("Profile has degrees --", profile.getDegrees())
+    profile_type = input("Which Profile would you like to create? Manager/Engineer - ")
+    profile = ProfileCreatorFactory.create_profile(profile_type)
+    print("Creating Profile of ", profile_type)
+    print("Profile has following degrees -")
+    for deg in profile.getDegrees():
+        print('- ', deg)

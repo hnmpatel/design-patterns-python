@@ -20,22 +20,22 @@ class CarFactory(metaclass=ABCMeta):
 class SedanCarFactory(CarFactory):
 
     def build_parts(self):
-        return SedanCarParts()
+        return SedanCarPartsFactory()
 
     def build_car(self):
-        return SedanCar()
+        return SedanCarAssembleFactory()
 
 
 class SUVCarFactory(CarFactory):
 
     def build_parts(self):
-        return SUVCarParts()
+        return SUVCarPartsFactory()
 
     def build_car(self):
-        return SUVCar()
+        return SUVCarAssembleFactory()
 
 
-class CarParts(metaclass=ABCMeta):
+class CarPartsFactory(metaclass=ABCMeta):
     """
     Declare an interface for a type of car parts.
     """
@@ -45,19 +45,25 @@ class CarParts(metaclass=ABCMeta):
         pass
 
 
-class SedanCarParts(CarParts):
+class SedanCarPartsFactory(CarPartsFactory):
 
     def build(self):
         print("Sedan car parts are built")
 
+    def __str__(self):
+        return '<Sedan car parts>'
 
-class SUVCarParts(CarParts):
+
+class SUVCarPartsFactory(CarPartsFactory):
 
     def build(self):
         print("SUV Car parts are built")
 
+    def __str__(self):
+        return '<SUV car parts>'
 
-class AbstractCar(metaclass=ABCMeta):
+
+class CarAssembleFactory(metaclass=ABCMeta):
     """
     Declare an interface for a type of cars.
     """
@@ -67,13 +73,13 @@ class AbstractCar(metaclass=ABCMeta):
         pass
 
 
-class SedanCar(AbstractCar):
+class SedanCarAssembleFactory(CarAssembleFactory):
 
     def assemble(self, parts):
         print(f"Sedan car is assembled here using {parts}")
 
 
-class SUVCar(AbstractCar):
+class SUVCarAssembleFactory(CarAssembleFactory):
 
     def assemble(self, parts):
         print(f"SUV car is assembled here using {parts}")
@@ -82,6 +88,6 @@ class SUVCar(AbstractCar):
 if __name__ == "__main__":
     for factory in (SedanCarFactory(), SUVCarFactory()):
         car_parts = factory.build_parts()
-        car_builder = factory.build_car()
         car_parts.build()
+        car_builder = factory.build_car()
         car_builder.assemble(car_parts)
