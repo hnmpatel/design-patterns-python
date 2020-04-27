@@ -33,11 +33,12 @@ class ProxyCmd(AbstractCmd):
 
 
 if __name__ == '__main__':
-    admin_executor = ProxyCmd("Admin")
-    other_executor = ProxyCmd("Other")
+    admin_executor = ProxyCmd("admin")
+    other_executor = ProxyCmd("other")
     try:
         admin_executor.execute("ls -la");
         admin_executor.execute("rm -rf /");
+        print("\n")
         other_executor.execute("ls -la");
         other_executor.execute("rm -rf");
     except Exception as e:
