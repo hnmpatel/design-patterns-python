@@ -11,3 +11,8 @@
   - Factory method
   - Abstract factory
 - Facade
+
+### Behavioural Design Patterns
+- Command
+- Observer
+- Proxy
