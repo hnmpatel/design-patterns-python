@@ -19,4 +19,7 @@
 ### Behavioural Design Patterns
 - Command - https://youtu.be/Z7vHUey-fb8
 - Observer - https://youtu.be/H5kxgh8z0oo
+
+### Structural Design Patterns
 - Proxy - https://youtu.be/3A-G35mQqZo
+- Template
