@@ -1,3 +1,6 @@
+'''
+Proxy Design Pattern - This is structural design pattern.
+'''
 import abc
 
 class AbstractCmd(metaclass=abc.ABCMeta):
